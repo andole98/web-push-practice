@@ -1,0 +1,18 @@
+debug: true
+
+fcm.account.path: firebase/account.json
+
+fcm.messaging:
+  apiKey: "AIzaSyAu9CsOnFXdnKA6INRmD6ZoJ2Rlf6UK1Cw"
+  authDomain: "nami-4490a.firebaseapp.com"
+  databaseURL: "https://nami-4490a.firebaseio.com"
+  projectId: "nami-4490a"
+  storageBucket: "nami-4490a.appspot.com"
+  messagingSenderId: "437168683087"
+  appId: "1:437168683087:web:05fd77d04f5484a2ee523a"
+  measurementId: "G-2PQLK669VT"
+
+spring:
+  devtools:
+    restart.enabled: true
+    livereload.enabled: true
