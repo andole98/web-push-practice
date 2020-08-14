@@ -1,8 +1,8 @@
-package com.andole.app.web;
+package com.andole.fcm.web;
 
-import com.andole.app.config.FCMConfig;
-import com.andole.app.model.Subscription;
-import com.andole.app.service.SubscribeService;
+import com.andole.fcm.config.FCMConfig;
+import com.andole.fcm.model.Subscription;
+import com.andole.fcm.service.SubscribeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

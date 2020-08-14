@@ -1,4 +1,4 @@
-package com.andole.app.config;
+package com.andole.fcm.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

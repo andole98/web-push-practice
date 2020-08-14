@@ -1,4 +1,4 @@
-package com.andole.app.model;
+package com.andole.fcm.model;
 
 import lombok.Data;
 

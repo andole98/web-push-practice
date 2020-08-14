@@ -1,7 +1,7 @@
-package com.andole.app.web;
+package com.andole.fcm.web;
 
-import com.andole.app.model.PushRequest;
-import com.andole.app.service.PushService;
+import com.andole.fcm.model.PushRequest;
+import com.andole.fcm.service.PushService;
 import com.google.firebase.messaging.FirebaseMessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package com.andole.app;
+package com.andole.fcm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

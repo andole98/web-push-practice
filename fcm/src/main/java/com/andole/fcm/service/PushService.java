@@ -1,7 +1,7 @@
-package com.andole.app.service;
+package com.andole.fcm.service;
 
-import com.andole.app.model.PushRequest;
-import com.andole.app.model.Subscription;
+import com.andole.fcm.model.PushRequest;
+import com.andole.fcm.model.Subscription;
 import com.google.firebase.messaging.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
