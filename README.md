@@ -33,34 +33,43 @@ Push Api는 브라우저별로 구현이 다르다. 크롬은 FCM, Firebase Clou
 - `Subscription`  
     Application Server가 End User로 알림을 보내기 위해 필요한 정보.  
     Application Server가 End User에게 알림을 보내고자 할 때, `Subscription`을 이용해서 Push Service에 요청하게 된다.  
-    End User가 Push Service에게, Application Server로부터 Push를 받고자 한다는 의사를 전달하면, Push Service는 End User에게 `Subscription`, 구독정보를 생성하고 응답한다.      
+    Push Service가 `Subscription`을 생성할 때, `VapidKey`가 필요하다. 해당 `Subscription`은 `VapidKey`를 발행한 Application Server만이 사용할 수 있다.  
+    End User는 A의 알림을 수신할 목적으로 `Subscription`을 발행했는데, B가 `Subscription`을 가로채고 알림을 보내려 한다면 거부된다. `VapidKey`가 다르므로(A의 비밀키를 모르므로) 인증에 실패한다.        
     명세에 따르면 `Subscription`에는 `endpoint`라는 `URL`이 반드시 포함되어야 하며, `endpoint`는 **반드시 UNIQUE** 해야 한다.
     
-```json
+```javascript
+//sample Subscription
 {
     "endpoint": "https://fcm.googleapis.com/fcm/send/..",
     "expirationTime": 12345,
     "keys": {
-        "p256dh": "p256dhkey",
+        "p256dh": "p256dhkey...",
         "auth": "auth-info"
     }
 }
 ```
 ## Scenario
 
-[1.]() End User는 Application Server로부터 Web Push를 받을 것인지 결정한다. 브라우저에 권한을 부여하는 방식으로 이루어진다.
+### Client
 
-[2.]() End User는 push 이벤트를 처리할 ServiceWorker를 등록한다.
+[1.]() Application Server로부터 Web Push를 받을 것인지 결정한다. 브라우저에 권한을 부여하는 방식으로 이루어진다.
+
+[2.]() push 이벤트를 처리할 ServiceWorker를 등록한다.
   
-[3.]() End User는 Application Server로부터 `VapidKey`를 가져온다.
+[3.]() Application Server로부터 `VapidKey`를 받는다.
 
-[4.]() End User는 Push Service에 `VapidKey`를 전달하며 `Subscription`을 요청한다.
-   
-[5.]() Push Service는 `VapidKey`의 유효성을 검사하고, 내부적으로 인증정보를 저장한 뒤 `Subscription`을 전달한다.
+[4.]() Push Service에 `VapidKey`를 전달하며 `Subscription`을 요청한다.
 
-[6.]() End User는 Application Server에 `Subscription`을 전달한다. Application Server는 해당 End User와 `Subscription`을 내부적으로 처리해야 한다.(DB 저장 등)
+[6.]() Application Server에 `Subscription`을 전달한다. Application Server는 해당 End User와 `Subscription`을 내부적으로 처리해야 한다.(DB 저장 등)
 
-[7.]() Application Server가 알림을 보내려면, `Subscription`을 이용하여 Push Service에 푸시를 요청한다. Push Service는 요청의 **Authorization** 헤더의 값으로 인증을 수행하고, 문제없다면 End User에게 알림을 Push한다.
-   
-[8.]() End User의 ServiceWorker는 push 이벤트를 받는다.
+### Application Server
+
+[1.]() `VapidKey`를 준비한다. 
+
+[2.]() End User의 `Subscription`을 저장한다.
+
+[3.]() `VapidKey`, `Subscription`을 이용하여 encrypt를 수행한다.
+
+[4.]() Push Service에 POST 요청을 보낸다.
+
 
