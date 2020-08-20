@@ -27,10 +27,11 @@ Push Api는 브라우저별로 구현이 다르다. 크롬은 FCM, Firebase Clou
     Application Server로부터 알림을 요청받아 End User에게 알림을 전송한다. c.f) FCM, GCM, APN ...
 
 - [VapidKey](https://tools.ietf.org/html/draft-ietf-webpush-vapid-01)  
-    Application Server가 스스로를 인증하기 위해 발행하는 키 쌍이다. End User는 Application Server로부터 VapidKey를 받아 Push Service에 전달한다. Push Service는 VapidKey를 검증하고 End User에게 `Subscription`을 발행한다.  
+    Application Server가 스스로를 인증하기 위해 발행하는 키 쌍.  
+    End User는 Application Server로부터 VapidKey를 받아 Push Service에 전달한다. Push Service는 VapidKey를 검증하고 End User에게 `Subscription`을 발행한다.  
     Application Server가 Push Service에게 알림을 요청할 때, 스스로를 인증하기 위해 VapidKey를 이용한 encrypt를 수행한다.
 
-- `Subscription`  
+- Subscription  
     Application Server가 End User로 알림을 보내기 위해 필요한 정보.  
     Application Server가 End User에게 알림을 보내고자 할 때, `Subscription`을 이용해서 Push Service에 요청하게 된다.  
     Push Service가 `Subscription`을 생성할 때, `VapidKey`가 필요하다. 해당 `Subscription`은 `VapidKey`를 발행한 Application Server만이 사용할 수 있다.  
@@ -52,24 +53,22 @@ Push Api는 브라우저별로 구현이 다르다. 크롬은 FCM, Firebase Clou
 
 ### Client
 
-[1.]() Application Server로부터 Web Push를 받을 것인지 결정한다. 브라우저에 권한을 부여하는 방식으로 이루어진다.
+[1.](https://github.com/andole98/web-push-practice/blob/master/push-api/src/main/resources/static/main.js#L2) Application Server로부터 Web Push를 받을 것인지 결정한다. 브라우저에 권한을 부여하는 방식으로 이루어진다.
 
-[2.]() push 이벤트를 처리할 ServiceWorker를 등록한다.
+[2.](https://github.com/andole98/web-push-practice/blob/master/push-api/src/main/resources/static/main.js#L15) push 이벤트를 처리할 ServiceWorker를 등록한다.
   
-[3.]() Application Server로부터 `VapidKey`를 받는다.
+[3.](https://github.com/andole98/web-push-practice/blob/master/push-api/src/main/resources/static/main.js#L13) Application Server로부터 `VapidKey`를 받는다.
 
-[4.]() Push Service에 `VapidKey`를 전달하며 `Subscription`을 요청한다.
-
-[6.]() Application Server에 `Subscription`을 전달한다. Application Server는 해당 End User와 `Subscription`을 내부적으로 처리해야 한다.(DB 저장 등)
+[4.](https://github.com/andole98/web-push-practice/blob/master/push-api/src/main/resources/static/main.js#L18) Push Service에 `VapidKey`를 전달하며 `Subscription`을 요청한다.
 
 ### Application Server
 
-[1.]() `VapidKey`를 준비한다. 
+[1.](https://github.com/andole98/web-push-practice/blob/master/push-api/src/main/java/com/andole/push_api/config/AppConfig.java#L22) `VapidKey`를 준비한다. 
 
-[2.]() End User의 `Subscription`을 저장한다.
+[2.](https://github.com/andole98/web-push-practice/blob/master/push-api/src/main/java/com/andole/push_api/service/WebPushService.java#L34) End User의 `Subscription`을 저장한다.
 
-[3.]() `VapidKey`, `Subscription`을 이용하여 encrypt를 수행한다.
+[3.](https://github.com/web-push-libs/webpush-java/blob/master/src/main/java/nl/martijndwars/webpush/PushService.java#L182) `VapidKey`, `Subscription`을 이용하여 encrypt를 수행한다.
 
-[4.]() Push Service에 POST 요청을 보낸다.
+[4.](https://github.com/andole98/web-push-practice/blob/master/push-api/src/main/java/com/andole/push_api/service/WebPushService.java#L53) Push Service에 POST 요청을 보낸다.
 
 
