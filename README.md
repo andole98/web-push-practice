@@ -61,6 +61,8 @@ Push Api는 브라우저별로 구현이 다르다. 크롬은 FCM, Firebase Clou
 
 [4.](https://github.com/andole98/web-push-practice/blob/master/push-api/src/main/resources/static/main.js#L18) Push Service에 `VapidKey`를 전달하며 `Subscription`을 요청한다.
 
+[5.](https://github.com/andole98/web-push-practice/blob/master/push-api/src/main/resources/static/main.js#L23) Application Server에 Subscription을 등록한다.
+
 ### Application Server
 
 [1.](https://github.com/andole98/web-push-practice/blob/master/push-api/src/main/java/com/andole/push_api/config/AppConfig.java#L22) `VapidKey`를 준비한다. 
